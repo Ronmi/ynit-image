@@ -8,6 +8,7 @@ RUN export deps="git wget ca-certificates" \
  && export GOPATH="/gopath" \
  && export GOROOT="/go" \
  && export YNITDIR="$GOPATH/src/github.com/Ronmi/ynit" \
+ && dpkg -l | awk '{print $2}' > /dpkg.orig \
  && apt-get update \
  && apt-get install -y --no-install-recommends $deps \
  && mkdir -p $GOPATH $GOROOT \
@@ -15,6 +16,8 @@ RUN export deps="git wget ca-certificates" \
  && mkdir -p $YNITDIR \
  && git clone -b $YNITVER https://github.com/Ronmi/ynit $YNITDIR \
  && (cd $YNITDIR && $GOROOT/bin/go get && $GOROOT/bin/go build && cp $YNITDIR/ynit /usr/local/bin/) \
+ && dpkg -l | awk '{print $2}' > /dpkg.new \
+ && diff -u0 dpkg.orig dpkg.new | grep '^\+[a-z0-9]'|sed 's/+//' | xargs apt-get purge -y --purge \
  && apt-get purge -y $deps libsasl2-2 libsasl2-modules \
  && apt-get autoremove --purge -y \
  && apt-get clean \
