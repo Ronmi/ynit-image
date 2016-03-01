@@ -23,4 +23,7 @@ RUN export deps="git wget ca-certificates" \
  && apt-get clean \
  && rm -fr /var/lib/apt/lists/* $GOPATH $GOROOT
 
+# create default ynit directory
+RUN mkdir /etc/ynit
+
 CMD ["/usr/local/bin/ynit"]
