@@ -1,4 +1,4 @@
-FROM debian:old-stable
+FROM debian:oldstable
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
 ENV YNITVER v0.1
