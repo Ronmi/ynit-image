@@ -1,0 +1,23 @@
+FROM debian:old-stable
+MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
+
+ENV YNITVER v0.1
+ENV GOVER 1.6
+
+RUN export deps="git wget" \
+ export GOPATH=/gopath \
+ export GOROOT=/go \
+ export YNITDIR=$GOPATH/src/github.com/Ronmi/ynit \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends $deps \
+ && mkdir -p $GOPATH $GOROOT \
+ && wget -q https://storage.googleapis.com/golang/go$GOVER.linux-amd64.tar.gz | tar zxf - \
+ && mkdir -p $YNITDIR \
+ && git clone -v $YNITVER https://github.com/Ronmi/ynit $YNITDIR \
+ && (cd $YNITDIR && go get && go build && cp $YNITDIR/ynit /usr/local/bin/) \
+ && apt-get purge -y git \
+ && apt-get autoremove --purge -y \
+ && apt-get clean \
+ && rm -fr /var/lib/apt/lists/* $GOPATH $GOROOT
+
+CMD ["/usr/local/bin/ynit"]
