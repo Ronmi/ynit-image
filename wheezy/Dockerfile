@@ -1,7 +1,7 @@
 FROM debian:wheezy
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
-ENV YNITVER v0.1.1
+ENV YNITVER v0.1.2
 ENV GOVER 1.6
 
 RUN export deps="git wget ca-certificates" \
