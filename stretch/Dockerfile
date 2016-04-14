@@ -2,7 +2,7 @@ FROM debian:stretch
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
 ENV YNITVER v0.1.2
-ENV GOVER 1.6
+ENV GOVER 1.6.1
 
 RUN export deps="git wget ca-certificates" \
  && export GOPATH="/gopath" \
