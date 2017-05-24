@@ -1,8 +1,8 @@
 FROM debian:latest
 MAINTAINER Ronmi Ren <ronmi@patrolavia.com>
 
-ENV YNITVER v0.1.2
-ENV GOVER 1.6.1
+ENV YNITVER v0.1.3
+ENV GOVER 1.8.2
 
 RUN export deps="git wget ca-certificates" \
  && export GOPATH="/gopath" \
