@@ -3,7 +3,7 @@ FROM golang as builder
 RUN go get -u -v github.com/Ronmi/ynit
 RUN go install github.com/Ronmi/ynit
 
-FROM debian:wheezy
+FROM debian:buster
 MAINTAINER Ronmi Ren <ronmi.ren@gmail.com>
 
 COPY --from=builder /go/bin/ynit /usr/local/bin/
